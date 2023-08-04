@@ -3,7 +3,7 @@ import time
 
 class Barbeiro:
     def __init__(self):
-        self.mutex = threading.Lock()
+        self.mutexTread = threading.Lock()
 
     def cortarCabelo(self, cliente_num):
         print(f"Barbeiro: Cliente {cliente_num}, cortando cabelo...")
@@ -22,7 +22,7 @@ class Barbeiro:
 
 class ExclusaoMutua:
     def __init__(self):
-        self.mutex = threading.Lock()
+        self.mutexTread = threading.Lock()
         self.barbeiro = Barbeiro()
         self.clienteNumero = 0
         self.servicos = ["cabelo", "barba", "bigode"]
@@ -33,10 +33,10 @@ class ExclusaoMutua:
         }
 
     def cliente(self, servico):
-        self.mutex.acquire()
+        self.mutexTread.acquire()
         self.clienteNumero += 1
         cliente_num = self.clienteNumero
-        self.mutex.release()
+        self.mutexTread.release()
 
         print(f"Cliente {cliente_num}: Quero cortar {servico}")
 
